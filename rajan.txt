@@ -1,0 +1,6 @@
+postgres url -- postgresql://mydatabase_owner:3XuSyMsjti5c@ep-dark-bird-a5ymbwld.us-east-2.aws.neon.tech/mydatabase?sslmode=require
+
+
+prisma accelerate--
+
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMWUxMTU5NTAtOWI4ZC00OGI5LWFjMGUtZDAzMmI1MGE1MTM5IiwidGVuYW50X2lkIjoiNDEzMzdlNzc4MzhiMzExY2Y0NjIwNDA0ODVkYWZlNWVlMzQwOTI1NjczNzZiNzdlYWY1MWE2NjEyOTk2YzhjNCIsImludGVybmFsX3NlY3JldCI6IjAzODYxMjBkLTQ2ZGYtNGRlZi05YjFjLWMzOTEzYmEwYzU4MiJ9.Tddk8JBAxQYKJOk2QYJDwIeyh-yN5ikgkYdvpLpX8jo"
