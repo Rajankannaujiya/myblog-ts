@@ -1,8 +1,11 @@
 import { Hono } from 'hono'
 import { userRouter } from './router/user'
 import { blogRouter } from './router/blog'
+import { cors } from 'hono/cors'
 
 const app = new Hono()
+
+app.use('/api/*', cors())
 
 app.get('/', (c) => {
   return c.text('Hello Hono!')

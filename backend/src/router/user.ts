@@ -31,6 +31,7 @@ userRouter.post("/signup", async (c) => {
     }
     const user = await prisma.user.create({
       data: {
+        username:body.username,
         email:body.email,
         password: body.password,
       },
@@ -62,7 +63,8 @@ userRouter.post("/signin", async (c) => {
 
     const user = prisma.user.findUnique({
       where: {
-        email: body.email
+        email: body.email,
+        password:body.password
       },
     });
 
