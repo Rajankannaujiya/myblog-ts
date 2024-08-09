@@ -27,9 +27,11 @@ export const blogRouter = new Hono<{
 
 blogRouter.use('/*', async (c: CustomContext, next: () => Promise<void>) => {
   try {
-    const authHeader = c.req.header("authorization") || "";
+    const authHeader = c.req.header("Authorization")|| "";
 
     // Verify the token and cast the result to the custom payload type
+	console.log(authHeader)
+	
     const user = await verify(authHeader, c.env.JWT_SECRET) as JwtUserPayload;
 	console.log("i am the user",user)
 
@@ -163,7 +165,19 @@ blogRouter.get('/:id', async (c) => {
     		where: {
           // @ts-ignore
     			id: id
-    		}
+    		},
+
+			select:{
+				id:true,
+				title:true,
+				content:true,
+				pulishedDate:true,
+				author:{
+					select:{
+						username:true,
+					}
+				}
+			}
     	});
     	return c.json(post);
   } catch (error) {

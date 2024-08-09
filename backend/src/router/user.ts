@@ -39,7 +39,7 @@ userRouter.post("/signup", async (c) => {
     console.log(user);
 
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json({ jwt: jwt });
+    return c.json({ id: user.id ,jwt: jwt });
   } catch (error) {
     c.status(411)
     console.log("this is the error", error);
@@ -60,13 +60,15 @@ userRouter.post("/signin", async (c) => {
       c.status(411);
       return c.json({ message: "input is not correct" });
     }
+    console.log(body)
 
-    const user = prisma.user.findUnique({
+    const user =await prisma.user.findUnique({
       where: {
         email: body.email,
         password:body.password
       },
     });
+    
 
     if (!user) {
       c.status(403);
@@ -74,6 +76,7 @@ userRouter.post("/signin", async (c) => {
     }
 // @ts-ignore
     const jwt = await sign({ id: user.id}, c.env.JWT_SECRET);
+    // @ts-ignore
     return c.json({ jwt: jwt });
   } catch (error) {
     console.log(error);

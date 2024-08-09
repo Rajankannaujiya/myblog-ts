@@ -1,10 +1,22 @@
 
-import { BlogCard } from '../components/BlogCard'
+import FullBlog from '../components/FullBlog';
+import { useBlog } from '../hooks'
 
+
+// here you can use the atomFamilies/SelectorsFamilies Perfect use
 function Blog() {
+
+  const {loading,blog,error} = useBlog();
+
+  if(loading){
+    return (
+      <div>Loading...</div>
+    )
+  }
+
   return (
     <div>
-      <BlogCard id={"1"} authorName='rajan' title='this is the title of the blog' content='this is the content of the blog' publishedDate='08 August 2024'/>
+      <FullBlog />
     </div>
   )
 }

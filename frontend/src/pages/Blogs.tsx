@@ -5,6 +5,7 @@ import useBlogs from "../hooks";
 function Blogs() {
 
   const {loading,blogs,error} = useBlogs();
+  console.log("this is blog",blogs)
 
   if(loading){
     return(
@@ -26,7 +27,7 @@ function Blogs() {
             authorName={post.author.username}
             title={post.title}
             content={post.content}
-            publishedDate={post.publishedDate}
+            pulishedDate={post.pulishedDate}
             />)
            : <div className="max-w-xl">{error}</div>
         }
