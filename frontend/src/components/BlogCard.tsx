@@ -1,11 +1,11 @@
 
 import { Link } from "react-router-dom";
 interface BlogCardProps {
+    id: string;
     authorName: string;
     title: string;
     content: string;
     publishedDate: string;
-    id: number;
 }
 
 export const BlogCard = ({

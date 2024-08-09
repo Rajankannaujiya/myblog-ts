@@ -6,6 +6,7 @@ import { BACKEND_URL } from "../config";
 import Input from "./Input";
 import Button from "./Button";
 import Header from "./Header";
+import DangerAlert from "./Alert";
 
 function SigninComp(){
     const navigate = useNavigate();
@@ -22,8 +23,8 @@ function SigninComp(){
             localStorage.setItem("token", jwt);
             navigate("/blogs");
         } catch(e) {
-            alert("Error while signing up")
-            // alert the user here that the request failed
+            <DangerAlert color="red" alertType="Danger alert" description="failed to login"/>
+             // alert the user here that the request failed
         }
     }
     
