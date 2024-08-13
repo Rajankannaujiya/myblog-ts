@@ -62,7 +62,7 @@ try {
 		const body = await c.req.json();
 
 		const success = createPostInput.safeParse(body)
-		if(!success || body.title!=='' || body.content!== ''){
+		if(!success ){
 			c.status(411);
 			return c.json({message: "input is not correct"})
 		}
