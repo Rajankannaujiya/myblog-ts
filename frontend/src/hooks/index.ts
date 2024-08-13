@@ -30,7 +30,7 @@ export function useBlog({id}:{id:string}){
         Authorization:localStorage.getItem("token")
       }
      }).then(response=>{
-      setBlog(response.data);
+      setBlog(response.data.post);
       setLoading(false);
      })
     } catch (error) {

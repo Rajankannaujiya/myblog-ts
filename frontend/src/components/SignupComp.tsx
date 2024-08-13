@@ -6,6 +6,7 @@ import { BACKEND_URL } from "../config";
 import Input from "./Input";
 import Button from "./Button";
 import Header from "./Header";
+import DangerAlert from "./Alert";
 
 function SignupComp(){
     const navigate = useNavigate();
@@ -15,16 +16,21 @@ function SignupComp(){
         password: ""
     });
 
-    console.log("the post is",postInputs)
+    const [isClick, setisClick] = useState(false)
+
     async function sendRequest() {
         try {
+            setisClick(true)
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, postInputs);
             const jwt = response.data;
             localStorage.setItem("token", jwt);
             navigate("/blogs");
         } catch(e) {
-            alert("Error while signing up")
+            <DangerAlert color="red" alertType="Danger alert" description="failed to login"/>
             // alert the user here that the request failed
+        }
+        finally{
+            setisClick(false)
         }
     }
     
@@ -35,14 +41,14 @@ function SignupComp(){
                   <Header headerText="Already have an Account?" linkto="signin" directto="Signin" />
                 </div>
                 <div className="pt-8">
-                    <Input label="Username" placeholder="Harkirat Singh..." onChange={(e) => {
+                    <Input label="Username" placeholder="Enter the username" onChange={(e) => {
                         setPostInputs({
                             ...postInputs,
                             name: e.target.value
                         })
                     }} />
 
-                    <Input label="Username" placeholder="harkirat@gmail.com" onChange={(e) => {
+                    <Input label="email" placeholder="Enter the email" onChange={(e) => {
                         setPostInputs({
                             ...postInputs,
                             email: e.target.value
@@ -55,7 +61,7 @@ function SignupComp(){
                         })
                     }} />
 
-                    <Button type="button" onClick={sendRequest} buttonFor="SignUp" />
+                    <Button type="button" onClick={sendRequest} buttonFor="SignUp" colour="gray" isClicked={isClick}/>
                 </div>
             </div>
         </div>

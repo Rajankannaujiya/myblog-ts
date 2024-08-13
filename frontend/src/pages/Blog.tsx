@@ -1,22 +1,35 @@
 
-import FullBlog from '../components/FullBlog';
+import { useParams } from 'react-router-dom';
+import {FullBlog} from '../components/FullBlog';
 import { useBlog } from '../hooks'
+import type { Blog } from '../hooks';
+
+import Appbar from '../components/Appbar';
+import FullBlogSkelleton from '../components/FullBlogSkelleton';
+
 
 
 // here you can use the atomFamilies/SelectorsFamilies Perfect use
 function Blog() {
 
-  const {loading,blog,error} = useBlog();
+  const {id} = useParams()
+
+  const {loading,blog} = useBlog({id:id || ""});
 
   if(loading){
     return (
-      <div>Loading...</div>
+      <div>
+        <Appbar />
+      
+          <FullBlogSkelleton />
+        </div>
+       
     )
   }
 
   return (
     <div>
-      <FullBlog />
+      <FullBlog blog={blog as Blog} />
     </div>
   )
 }

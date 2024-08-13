@@ -15,9 +15,12 @@ function SigninComp(){
         password: ""
     });
 
+    const [isClick, setisClick]= useState(false)
+
     console.log("the post is",postInputs)
     async function sendRequest() {
         try {
+            setisClick(true);
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, postInputs);
             const jwt = response.data.jwt;
             localStorage.setItem("token", jwt);
@@ -26,13 +29,17 @@ function SigninComp(){
             <DangerAlert color="red" alertType="Danger alert" description="failed to login"/>
              // alert the user here that the request failed
         }
+
+        finally{
+            setisClick(false);
+        }
     }
     
     return <div className="h-screen flex justify-center flex-col">
         <div className="flex justify-center">
             <div>
                 <div className="px-10">
-                  <Header headerText="Don't have an account?" linkto="signup" directto="Signup" />
+                  <Header headerText="Don't have an account?" linkto="" directto="Signup" />
                 </div>
                 <div className="pt-8">
 
@@ -49,7 +56,7 @@ function SigninComp(){
                         })
                     }} />
 
-                    <Button type="button" onClick={sendRequest} buttonFor="SignIn" />
+                    <Button type="button" onClick={sendRequest} buttonFor="SignIn" colour="gray" isClicked={isClick}/>
                 </div>
             </div>
         </div>

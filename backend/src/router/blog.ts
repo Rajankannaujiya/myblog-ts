@@ -62,7 +62,7 @@ try {
 		const body = await c.req.json();
 
 		const success = createPostInput.safeParse(body)
-		if(!success){
+		if(!success || body.title!=='' || body.content!== ''){
 			c.status(411);
 			return c.json({message: "input is not correct"})
 		}
@@ -179,7 +179,7 @@ blogRouter.get('/:id', async (c) => {
 				}
 			}
     	});
-    	return c.json(post);
+    	return c.json({post:post});
   } catch (error) {
     console.log(error);
     return c.json("error has occured while fetching a post")

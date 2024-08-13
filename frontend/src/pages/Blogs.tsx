@@ -1,5 +1,6 @@
 import Appbar from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
+import BlogSkeletton from "../components/BlogSkeletton";
 import useBlogs from "../hooks";
 
 function Blogs() {
@@ -10,8 +11,19 @@ function Blogs() {
   if(loading){
     return(
       <div>
-        Loading...
+      <Appbar />
+      <div className="flex justify-center">
+        <div className="max-w-xl">
+        <BlogSkeletton />
+        <BlogSkeletton />
+        <BlogSkeletton />
+        <BlogSkeletton />
+        <BlogSkeletton />
+        <BlogSkeletton />
+
+        </div>
       </div>
+    </div>
     )
   }
 
@@ -22,7 +34,7 @@ function Blogs() {
         <div className="max-w-xl">
           {blogs?
           blogs.map(post=>
-            <BlogCard 
+            <BlogCard key={post.id.toString()}
             id={post.id.toString()}
             authorName={post.author.username}
             title={post.title}
