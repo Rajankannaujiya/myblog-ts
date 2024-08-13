@@ -5,7 +5,10 @@ import { cors } from 'hono/cors'
 
 const app = new Hono()
 
-app.use('/api/*', cors())
+app.use('/api/*', cors({
+  origin: '*', // specify the allowed origin
+  credentials: true
+}));
 
 app.get('/', (c) => {
   return c.text('Hello Hono!')

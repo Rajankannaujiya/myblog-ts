@@ -19,7 +19,7 @@ userRouter.post("/signup", async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
   console.log("I reach here");
-
+console.log(await c.req.json())
   try {
     const body = await c.req.json();
     console.log(body);
@@ -31,7 +31,7 @@ userRouter.post("/signup", async (c) => {
     }
     const user = await prisma.user.create({
       data: {
-        username:body.username,
+        username:body.name,
         email:body.email,
         password: body.password,
       },
@@ -39,7 +39,7 @@ userRouter.post("/signup", async (c) => {
     console.log(user);
 
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json({ id: user.id ,jwt: jwt });
+    return c.json({ jwt: jwt });
   } catch (error) {
     c.status(411)
     console.log("this is the error", error);
@@ -54,13 +54,14 @@ userRouter.post("/signin", async (c) => {
 
   try {
     const body = await c.req.json();
+    console.log(c.header)
     const success = signInInput.safeParse(body);
 
     if (!success) {
       c.status(411);
       return c.json({ message: "input is not correct" });
     }
-    console.log(body)
+    console.log("this is the body",body)
 
     const user =await prisma.user.findUnique({
       where: {
